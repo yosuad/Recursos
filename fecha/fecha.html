@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+    <script>
+         function obtenerFecha() {
+            var fechaActual = new Date();
+            var opciones = { year: 'numeric', month: '2-digit', day: '2-digit' };
+            var fechaFormateada = fechaActual.toLocaleDateString('es-ES', opciones);
+            return fechaFormateada;
+        }
+    
+        function mostrarFecha() {
+            var fecha = obtenerFecha();
+            console.log("La fecha actual es: " + fecha);
+        }
+    
+        mostrarFecha();
+
+
+    </script>
+
+   
+
+</body>
+</html>
