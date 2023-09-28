@@ -1,0 +1,55 @@
+#sheet{
+    margin: 0;    
+    padding-top: 80px;   
+    align-items: center;
+    justify-content: center;
+    background-color: rgb(255, 255, 255);
+    width: 500px;    
+    margin-left: 35%;
+    font-family: 'Open Sans', sans-serif;  
+}
+#chart{
+    position: relative;
+    z-index: 1;
+    background: #FFFFFF;
+    
+    margin: 0 auto 100px;
+    padding: 45px;
+    text-align: center;
+    box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+}
+h1{
+    text-align: center;
+
+}
+
+h3 {
+    margin-top: 33px;
+}
+
+div {
+    margin-bottom: -19px;
+}
+.campo1{
+    width: 86px;
+    letter-spacing: 2px;
+    font-size: 10px;
+    height: 100px;
+}
+
+button {
+    width: 86px;
+    height: 29px;
+}
+
+.btn_big{
+    margin-left: 6px;
+    margin-top: 6px;
+    width: 157px;
+
+}
+
+.seccion2 {
+    margin-top: 28px;
+    margin-bottom: 42px;
+}

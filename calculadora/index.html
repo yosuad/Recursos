@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/style.css">
+    <script src="JS/calculadora.js"></script>
+    <title>Document</title>
+</head>
+<body id="sheet">
+    <section id="chart">
+        <div>
+            <H1>CALCULADORA</H1>
+
+            <input type="number" id="campo1"></input>
+            <input type="number " id="campo2"></input>
+            <br> </br>
+            <button onclick="suma()"> + </button>
+            <button onclick="resta()"> - </button>
+            <button onclick="multiplicacion()"> x </button>
+            <button onclick="division()"> / </button>
+            <br> </br>    
+        </div>
+
+        <div>
+            <button onclick="raiz()" class="btn_big"> Raiz </button>
+            <button onclick="potencia()" class="btn_big"> Potencia </button>
+            <br>
+            <button onclick="absoluto()" class="btn_big"> Absoluto </button>
+            <button onclick="aleatorio()" class="btn_big"> Ramdom </button>
+        </div>
+
+        <H3>Resultado: </H3>
+        <input type="text" id="resultado"></input>
+
+        <div class="seccion2">
+            <button onclick="redondeo()"> Round </button>
+            <button onclick="piso()"> Floor </button>            
+            <button onclick="techo()"> Ceil </button>            
+        </div>
+
+</section>
+</body>
+</html>
