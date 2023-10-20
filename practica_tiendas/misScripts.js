@@ -1,3 +1,33 @@
+/*Generar tiendas  */ 
+function crearParrafotienda(textoLabel, valorMin){
+    // Crear las etiquetas parrafo y label
+    let elementoParrafo = document.createElement("p");
+    let elementoEtiqueta = document.createElement("label")
+
+    // Agregar etiqueta a label para conectar con el input
+    elementoEtiqueta.setAttribute("for", textoLabel);
+    
+    // Crear input
+    let elementoInput = document.createElement("input");
+    //establecer attributos input
+    elementoInput.setAttribute("type", "number");
+    elementoInput.setAttribute("id", textoLabel);
+    elementoInput.setAttribute("min", valorMin);
+    elementoInput.setAttribute("value", 0);
+
+    // Agregar laber e input al parrafo
+    elementoParrafo.appendChild(elementoEtiqueta);
+    elementoParrafo.appendChild(elementoInput);
+
+    // Devolver parrafo completo
+    return elementoParrafo;
+}
+
+
+
+
+// Capturar numeros y sacar resultado mayor venta y menor
+
 function extraerNumeroDesdeElemento(elemento){
     let miElemento = document.getElementById(elemento);
     let miTexto = miElemento.value;
