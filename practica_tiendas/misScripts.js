@@ -1,8 +1,26 @@
+// Crear Tiendas
+function crearTiendas(idContenedor, min, cantidadTiendas){
+    //Encontrar contenedor por su id
+    let elementoContenedor = document.getElementById(idContenedor);
+    //loop para crear tiendas
+    for(let conteoTiendas = 1; conteoTiendas <= cantidadTiendas; conteoTiendas++){
+        // crear el texto de label para poder llamar a la funcion
+        let textoEtiqueta = "Tienda " + conteoTiendas;
+        // Crear tiendas con la funcion crear parrafo tiendas
+        let parrafoTienda = crearParrafotienda(textoEtiqueta, min);
+        // Agregar el parrafo al contenedor
+        elementoContenedor.appendChild(parrafoTienda);
+    }
+}
+
+
+
 /*Generar tiendas  */ 
 function crearParrafotienda(textoLabel, valorMin){
     // Crear las etiquetas parrafo y label
     let elementoParrafo = document.createElement("p");
-    let elementoEtiqueta = document.createElement("label")
+    let elementoEtiqueta = document.createElement("label");
+    elementoEtiqueta.innerText = textoLabel + "   ";
 
     // Agregar etiqueta a label para conectar con el input
     elementoEtiqueta.setAttribute("for", textoLabel);
