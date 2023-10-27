@@ -55,6 +55,9 @@ function extraerNumeroDesdeElemento(elemento){
 
 function calcular(){
     let ventas = [];
+    let posicionVentas = 0;
+    let elementoVentas = document.getElementById("itemsTiendas");
+
 
     ventas[0] = extraerNumeroDesdeElemento("ventasTienda1");
     ventas[1] = extraerNumeroDesdeElemento("ventasTienda2");
