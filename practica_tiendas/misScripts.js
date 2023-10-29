@@ -46,9 +46,8 @@ function crearParrafotienda(textoLabel, valorMin){
 
 // Capturar numeros y sacar resultado mayor venta y menor
 
-function extraerNumeroDesdeElemento(elemento){
-    let miElemento = document.getElementById(elemento);
-    let miTexto = miElemento.value;
+function extraerNumeroDesdeElemento(elemento){    
+    let miTexto = elemento.value;
     let miNumero = Number(miTexto);
     return miNumero;
 }
@@ -58,13 +57,12 @@ function calcular(){
     let posicionVentas = 0;
     let elementoVentas = document.getElementById("itemsTiendas");
 
-
-    ventas[0] = extraerNumeroDesdeElemento("ventasTienda1");
-    ventas[1] = extraerNumeroDesdeElemento("ventasTienda2");
-    ventas[2] = extraerNumeroDesdeElemento("ventasTienda3");
-    ventas[3] = extraerNumeroDesdeElemento("ventasTienda4");
-    ventas[4] = extraerNumeroDesdeElemento("ventasTienda5");
-    ventas[5] = extraerNumeroDesdeElemento("ventasTienda6");
+    for(let item of elementoVentas.children){
+        let valorVenta = extraerNumeroDesdeElemento(item.children[1]);
+        ventas[posicionVentas] = valorVenta;
+        posicionVentas = posicionVentas + 1;
+    }
+    
  
     let totalVentas = sumarTotal(ventas);
     let ventaMayor = calcularMayor(ventas);
