@@ -68,7 +68,23 @@ function calcular(){
     let ventaMayor = calcularMayor(ventas);
     let ventaMenor = calcularMinimo(ventas);
 
-    let mensajeSalida = "Total Ventas: " + totalVentas + "/ Venta Mayor: " + ventaMayor + "/ Venta Menor: " + ventaMenor;
+
+    for (let item of elementoVentas.children){
+        let valorVenta = extraerNumeroDesdeElemento(item.children[1]);
+        item.children[1].className = "menuNeutro"
+
+        if(valorVenta == ventaMayor){
+            item.children[1].className = "menuInputMayor"
+        }
+        if(valorVenta == ventaMenor){
+            item.children[1].className = "menuInputMenor"
+        }
+
+    }
+
+
+
+    let mensajeSalida = "Total Ventas: " + totalVentas;
     let elementoSalida = document.getElementById("ParrafoSalida");
     elementoSalida.textContent = mensajeSalida;
 }
