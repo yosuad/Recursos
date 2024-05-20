@@ -1,22 +1,29 @@
 {
-  "name": "bienesraices",
+  "name": "propiedades",
   "version": "1.0.0",
-  "description": "Bienes Raices - Curso Desarrollo web Completo",
+  "description": "Proyecto SASS y NPM",
   "type": "module",
-  "main": "index.js",
+  "main": "gulpfile.js",
   "scripts": {
+    "sass": "sass --watch src/scss:build/css",
     "dev": "gulp"
   },
-  "author": "Juan De la torre @codigoconjuan",
+  "keywords": [
+    "SASS",
+    "Gulp"
+  ],
+  "author": "wiquiweb",
   "license": "ISC",
   "devDependencies": {
-    "gulp-concat": "^2.6.1",
-    "gulp-rename": "^2.0.0",
-    "glob": "^10.3.12",
     "gulp": "^5.0.0",
     "gulp-sass": "^5.1.0",
+    "sass": "^1.77.2"
+  },
+  "dependencies": {
+    "glob": "^10.3.15",
+    "gulp-concat": "^2.6.1",
+    "gulp-rename": "^2.0.0",
     "gulp-terser": "^2.1.0",
-    "sass": "^1.75.0",
-    "sharp": "^0.33.3"
+    "sharp": "^0.33.4"
   }
 }
