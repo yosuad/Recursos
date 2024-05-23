@@ -1,23 +1,40 @@
 <?php
 // BASE DE DATOS
 require '../../includes/config/database.php';
-
 $db = ConectarDB();
+
+// CONSULTAR PARA OBTENER LOS VENDEDORES
+$consulta = "SELECT * FROM vendedores";
+$resultado = mysqli_query($db, $consulta);
+
 // AREGLO CON MENSAJES DE ERRORES
 $errores = [];
+
+$titulo = '';
+$precio = '';
+$descripcion = '';
+$habitaciones = '';
+$wc = '';
+$estacionamiento = '';
+$vendedores_id = '';
+
 // EJECUTAR EL CODIGO DESPUES QUE EL USUARIO ENVIA EL FORMULARIO
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    // echo "<pre>";
-    // var_dump ($_POST);
-    // echo "<pre>";
+//     echo "<pre>";
+//     var_dump ($_POST);
+//     echo "<pre>";
 
-    $titulo = $_POST['titulo'];
-    $precio = $_POST['precio'];
-    $descripcion = $_POST['descripcion'];
-    $habitaciones = $_POST['habitaciones'];
-    $wc = $_POST['wc'];
-    $estacionamiento = $_POST['estacionamiento'];
-    $vendedores_id = $_POST['vendedores_id'];
+    $titulo = mysqli_real_escape_string( $db, $_POST['titulo']);
+    $precio = mysqli_real_escape_string( $db, $_POST['precio'] );
+    $descripcion = mysqli_real_escape_string( $db, $_POST['descripcion'] );
+    $habitaciones = mysqli_real_escape_string( $db, $_POST['habitaciones'] );
+    $wc = mysqli_real_escape_string( $db, $_POST['wc'] );
+    $estacionamiento = mysqli_real_escape_string( $db, $_POST['estacionamiento'] );
+    $vendedores_id = mysqli_real_escape_string( $db, $_POST['vendedores_id'] );
+    $creado = date('Y/m/d');
+
+    //ASIGNAR FILE HACIA UNA VARIABLE
+    $imagen = $_FILES['imagen'];
 
     if (!$titulo) {
         $errores[] = "Debes añadir un titulo";
@@ -47,21 +64,42 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $errores[] = "Seleciona el vendedor";
     }
 
+    if (!$imagen['name']) {
+        $errores[] = "La imagen es obligatoria";
+    }
+
+
+
     // REVISAR QUE LOS ERRORES ESTE VACIO
     if(empty($errores)){
+
+        // GENERAR UN NOMBRE UNICO
+        $nombreImagen = md5( uniqid( rand(), true)) . ".jpg";
+
+        // CREAR CARPETA 
+        $carpetaImagenes = '../../imagenes/';
+            if (!is_dir($carpetaImagenes)) {
+                mkdir($carpetaImagenes);
+            }
+            // SUBIR IMAGEN 
+            move_uploaded_file($imagen['tmp_name'], $carpetaImagenes . $nombreImagen );
+
+
+
     // INSERTAR EN LA BASE DE DATOS
-        $query = "INSERT INTO propiedades (titulo, precio, descripcion, habitaciones, wc, estacionamiento, vendedores_id)
-                   VALUES ('$titulo', '$precio', '$descripcion', '$habitaciones', '$wc', '$estacionamiento', '$vendedores_id')";
+        $query = "INSERT INTO propiedades (titulo, precio, imagen, descripcion, habitaciones, wc, estacionamiento, creado, vendedores_id)
+                   VALUES ('$titulo', '$precio', '$nombreImagen', '$descripcion', '$habitaciones', '$wc', '$estacionamiento', '$creado', '$vendedores_id')";
 
-    // echo $query;
-    $resultado = mysqli_query($db, $query);
-    if($resultado){
-        echo "Insertado Corretamente";
+        // echo $query;
+        $resultado = mysqli_query($db, $query);
+        if($resultado){
+            // REDIRECCIONAR AL USUARIO
+            header('Location: /propiedades/admin?resultado=1');
+        }
     }
-    }
-
 
 }
+
 
 
 require '../../includes/funciones.php';
@@ -74,45 +112,49 @@ incluirTemplates('header');
 
         <!-- MENSAJE FALTAN DATOS -->
         <?php foreach($errores as $error): ?>
-            <?php echo $error; ?>
+            <div class="alerta error">
+                <?php echo $error; ?>
+            </div>            
         <?php endforeach; ?>
         <!-- MENSAJE FALTAN DATOS -->
         
-        <form class="formulario" method="POST" action="crear.php">
+        <form class="formulario" method="POST" action="crear.php" enctype="multipart/form-data">
             <fieldset>
                 <legend>Informacion General</legend>
 
                 <label for="titulo">Titulo:</label>
-                <input type="text" id="titulo" name="titulo" placeholder="Titulo Propiedad">
+                <input type="text" id="titulo" name="titulo" placeholder="Titulo Propiedad" value="<?php echo $titulo ?>">
 
                 <label for="precio">Precio:</label>
-                <input type="number" id="precio" name="precio" placeholder="Precio Propiedad">
+                <input type="number" id="precio" name="precio" placeholder="Precio Propiedad" value="<?php echo $precio ?>">
 
                 <label for="imagen">Imagen:</label>
-                <input type="file" id="imagen" accept="image/jpeg, image/png">
+                <input type="file" id="imagen" accept="image/jpeg, image/png" name="imagen">
 
                 <label for="descripcion">Descripcion:</label>
-                <textarea id="descripcion" name="descripcion"></textarea>
+                <textarea id="descripcion" name="descripcion"><?php echo $descripcion; ?></textarea>
             </fieldset>
 
             <fieldset>
                 <legend>Informacion de la Propiedad</legend>
                     <label for="habitaciones">Habitaciones:</label>
-                    <input type="nomber" id="habitaciones" name="habitaciones" placeholder="Ej: 3" min="1" max="6">
+                    <input type="nomber" id="habitaciones" name="habitaciones" placeholder="Ej: 3" min="1" max="6" value="<?php echo $habitaciones ?>">
 
                     <label for="wc">Baños:</label>
-                    <input type="nomber" id="wc" name="wc" placeholder="Ej: 3" min="1" max="6">
+                    <input type="nomber" id="wc" name="wc" placeholder="Ej: 3" min="1" max="6" value="<?php echo $wc ?>">
 
                     <label for="estacionamiento">estacionamiento:</label>
-                    <input type="nomber" id="estacionamiento" name="estacionamiento" placeholder="Ej: 3" min="1" max="6">
+                    <input type="nomber" id="estacionamiento" name="estacionamiento" placeholder="Ej: 3" min="1" max="6" value="<?php echo $estacionamiento ?>">
             </fieldset>
 
             <fieldset>
                 <legend>Vendedor</legend>
+
                    <select name="vendedores_id">
                        <option value="">-- Seleccionar --</option>
-                       <option value="1">Juan</option>
-                       <option value="2">Karen</option>
+                            <?php while($row = mysqli_fetch_assoc($resultado)) : ?>
+                                <option <?php echo $vendedores_id === $row['id'] ? 'selected' : ''; ?> value="<?php echo $row['id']; ?>"> <?php echo $row['nombre'] . " " . $row['apellido'] ?> </option>
+                            <?php endwhile; ?>
                    </select>
             </fieldset>
 
