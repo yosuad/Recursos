@@ -17,7 +17,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
    if ($id) {
        // ELIMINAR ARCHIVO
-       $query = "SELECT imagen FROM propiedades WHERE id = ${id}";
+       $query = "SELECT imagen FROM propiedades WHERE id = $id";
 
        $resultado = mysqli_query($db, $query);
        $propiedad = mysqli_fetch_assoc($resultado);
@@ -25,7 +25,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
        unlink('../imagenes/' . $propiedad['imagen']);
 
        // ELIMINAR PROPIEDAD
-        $query = "DELETE FROM propiedades WHERE id = ${id}";
+        $query = "DELETE FROM propiedades WHERE id = $id";
 
         $resultado = mysqli_query($db, $query);
 
