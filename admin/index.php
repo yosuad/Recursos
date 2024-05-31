@@ -1,4 +1,20 @@
 <?php
+session_start();
+
+// echo "<pre>";
+// var_dump($_SESSION);
+// echo "</pre>";
+
+$auth = $_SESSION['login'];
+
+$auth = false;
+
+
+if (!$auth) {
+    header('Location: /propiedades');
+}
+
+
 
 // IMPORTAR LA CONEXION
 require '../includes/config/database.php';
