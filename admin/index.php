@@ -7,7 +7,6 @@ session_start();
 
 $auth = $_SESSION['login'];
 
-$auth = false;
 
 
 if (!$auth) {
