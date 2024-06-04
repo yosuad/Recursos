@@ -1,4 +1,13 @@
 <?php
+require '../../includes/funciones.php';
+$auth = estaAutenticado();
+if (!$auth) {
+    header('Location: /propiedades');
+}
+
+
+
+
 // BASE DE DATOS
 require '../../includes/config/database.php';
 $db = ConectarDB();
@@ -102,7 +111,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 
 
-require '../../includes/funciones.php';
+
 incluirTemplates('header');
 ?>
 
