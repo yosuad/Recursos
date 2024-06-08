@@ -1,5 +1,5 @@
 <?php
-require 'includes/config/database.php';
+require 'includes/app.php';
 $db = ConectarDB();
 // AUTENTICAR USUARIO
 $errores =[];
@@ -50,9 +50,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     
 }
 
-
-// INCLUIR HEADER
-require 'includes/funciones.php';
 incluirTemplates('header');
 ?>
 

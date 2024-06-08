@@ -6,8 +6,7 @@ if(!$id) {
     header('Location: index.php');
 }
 
-// IMPORTAR LA BASE DE DATOS
-require __DIR__ . '/includes/config/database.php';    
+require 'includes/app.php';
 $db = ConectarDB();
 
 // CONSULTAR
@@ -23,10 +22,6 @@ if (!$resultado->num_rows) {
 $propiedad = mysqli_fetch_assoc($resultado);
 
 
-
-
-
-require 'includes/funciones.php';
 
 incluirTemplates('header');
 ?>

@@ -1,0 +1,17 @@
+{
+  "name": "jhosep/propiedades",
+  "description": "proyecto PDO",
+  "type": "project",
+  "autoload": {
+    "psr-4": {
+      "App\\": "./classes"
+    }
+  },
+  "authors": [
+    {
+      "name": "yosuad",
+      "email": "yosuad@hotmail.com"
+    }
+  ],
+  "require": {}
+}

@@ -1,6 +1,6 @@
 <?php
 // IMPORTAR LA CONEXIÓN
-require 'includes/config/database.php';
+require 'includes/app.php';
 $db = ConectarDB();
 // CREAR UN EMAIL Y PASSWORD
 $email = "correo@correo.com";
