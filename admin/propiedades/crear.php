@@ -1,15 +1,12 @@
 <?php
-require '../../includes/funciones.php';
-$auth = estaAutenticado();
-if (!$auth) {
-    header('Location: /propiedades');
-}
+require '../../includes/app.php';
+
+use App\propiedad;
 
 
+estaAutenticado();
 
 
-// BASE DE DATOS
-require '../../includes/config/database.php';
 $db = ConectarDB();
 
 // CONSULTAR PARA OBTENER LOS VENDEDORES
@@ -29,9 +26,11 @@ $vendedores_id = '';
 
 // EJECUTAR EL CODIGO DESPUES QUE EL USUARIO ENVIA EL FORMULARIO
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-//     echo "<pre>";
-//     var_dump ($_POST);
-//     echo "<pre>";
+
+    $propiedad = new propiedad($_POST);
+
+    $propiedad -> guardar();
+   
 
     $titulo = mysqli_real_escape_string( $db, $_POST['titulo']);
     $precio = mysqli_real_escape_string( $db, $_POST['precio'] );
@@ -95,10 +94,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 
 
-    // INSERTAR EN LA BASE DE DATOS
-        $query = "INSERT INTO propiedades (titulo, precio, imagen, descripcion, habitaciones, wc, estacionamiento, creado, vendedores_id)
-                   VALUES ('$titulo', '$precio', '$nombreImagen', '$descripcion', '$habitaciones', '$wc', '$estacionamiento', '$creado', '$vendedores_id')";
-
         // echo $query;
         $resultado = mysqli_query($db, $query);
         if($resultado){
@@ -159,7 +154,7 @@ incluirTemplates('header');
             <fieldset>
                 <legend>Vendedor</legend>
 
-                   <select name="vendedores_id">
+                   <select name="vendedorid">
                        <option value="">-- Seleccionar --</option>
                             <?php while($row = mysqli_fetch_assoc($resultado)) : ?>
                                 <option <?php echo $vendedores_id === $row['id'] ? 'selected' : ''; ?> value="<?php echo $row['id']; ?>"> <?php echo $row['nombre'] . " " . $row['apellido'] ?> </option>
