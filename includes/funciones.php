@@ -11,9 +11,10 @@ function estaAutenticado() {
     session_start();
    
     if(!$_SESSION['login']){
-        header('Location: /ensayo.php');
+        header('Location: ../../login.php');
+        
     }
-   
+    
 }
 
 function debug($variable) {

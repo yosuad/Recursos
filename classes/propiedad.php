@@ -32,14 +32,15 @@ class propiedad{
     public function guardar() {        
     // INSERTAR EN LA BASE DE DATOS
     $query = "INSERT INTO propiedades (titulo, precio, imagen, descripcion, habitaciones, wc, estacionamiento, creado, vendedores_id)
-    VALUES ('$this->titulo', '$this->precio', '$this->imagen', '$this->descripcion', '$this->habitaciones', '$this->wc', '$this->estacionamiento', '$this->creado', '$this->vendedorid')";
+    VALUES ('$this->titulo', '$this->precio', '$this->imagen', '$this->descripcion', '$this->habitaciones', '$this->wc',
+    '$this->estacionamiento', '$this->creado', '$this->vendedorid')";
 
-    $resultado = self::$db->$query($query);
-        debug($resultado);
+    $resultado = self::$db->query($query);
+      
     }
 
     //DEFINIR LA CONEXION A LA BD
-    public function setDB($database){
+    public static function setDB($database){
         self::$db = $database;
     }
 

@@ -9,4 +9,4 @@ $db = ConectarDB();
 
 use App\propiedad;
 
-Propiedad::setDB($db);
+propiedad::setDB($db);
